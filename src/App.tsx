@@ -4,11 +4,15 @@ import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { IconButton } from "./components/icon-button";
 import Me from "./assets/me.webp";
 import { RainbowCanvas } from "./components/rainbow-canvas";
-import { GymmyLogo } from "./components/gymmy-logo";
-import { TickrLogo } from "./components/tickr-logo";
-import { SocialRoastLogo } from "./components/social-roast-logo";
-import { PathFindingVisualizerLogo } from "./components/path-finding-visualizer";
+import { GymmyLogo } from "./components/icons/gymmy-logo";
+import { TickrLogo } from "./components/icons/tickr-logo";
+import { SocialRoastLogo } from "./components/icons/social-roast-logo";
+import { PathFindingVisualizerLogo } from "./components/icons/path-finding-visualizer-logo";
 import { Pulse } from "./components/pulse";
+import { GymmyDialog } from "./components/dialogs/gymmy-dialog";
+import { TickrDialog } from "./components/dialogs/tickr-dialog";
+import { SocialRoastDialog } from "./components/dialogs/social-roast-dialog";
+import { PathFindingVisualizerDialog } from "./components/dialogs/path-finding-visualizer-dialog";
 
 // https://sparkly-speculoos-0c9197.netlify.app/
 
@@ -179,10 +183,10 @@ function App() {
         >
           <h4 className="text-xl font-bold">Projects</h4>
           <div className="flex relative gap-4">
-            <GymmyLogo className="h-full cursor-pointer" />
-            <TickrLogo className="h-full cursor-pointer" />
-            <SocialRoastLogo className="h-full cursor-pointer" />
-            <PathFindingVisualizerLogo className="h-full cursor-pointer" />
+            <GymmyDialog />
+            <TickrDialog />
+            <SocialRoastDialog />
+            <PathFindingVisualizerDialog />
           </div>
         </GlassCard>
         <GlassCard
