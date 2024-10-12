@@ -4,10 +4,6 @@ import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { IconButton } from "./components/icon-button";
 import Me from "./assets/me.webp";
 import { RainbowCanvas } from "./components/rainbow-canvas";
-import { GymmyLogo } from "./components/icons/gymmy-logo";
-import { TickrLogo } from "./components/icons/tickr-logo";
-import { SocialRoastLogo } from "./components/icons/social-roast-logo";
-import { PathFindingVisualizerLogo } from "./components/icons/path-finding-visualizer-logo";
 import { Pulse } from "./components/pulse";
 import { GymmyDialog } from "./components/dialogs/gymmy-dialog";
 import { TickrDialog } from "./components/dialogs/tickr-dialog";
@@ -28,8 +24,8 @@ type Status = ObjectValues<typeof STATUS>;
 const getStatus = (date: Date): Status => {
   const hour = date.getHours();
 
-  if (hour < 6 || hour > 22) return STATUS.offline;
-  if (hour < 8 || hour > 18) return STATUS.busy;
+  if (hour <= 5 || hour >= 22) return STATUS.offline;
+  if (hour <= 7 || hour >= 18) return STATUS.busy;
   return STATUS.available;
 };
 
