@@ -4,18 +4,65 @@ import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { IconButton } from "./components/icon-button";
 import Me from "./assets/me.webp";
 import { RainbowCanvas } from "./components/rainbow-canvas";
+import { GymmyLogo } from "./components/gymmy-logo";
+import { TickrLogo } from "./components/tickr-logo";
+import { SocialRoastLogo } from "./components/social-roast-logo";
+import { PathFindingVisualizerLogo } from "./components/path-finding-visualizer";
+import { cn } from "./lib/utils";
 
 // https://sparkly-speculoos-0c9197.netlify.app/
+
+const STATUS = {
+  available: "available",
+  busy: "busy",
+  offline: "offline",
+} as const;
+
+type ObjectValues<T> = T[keyof T];
+type Status = ObjectValues<typeof STATUS>;
+
+const getStatus = (date: Date): Status => {
+  const hour = date.getHours();
+
+  if (hour < 6 || hour > 22) return "offline";
+  if (hour < 8 || hour > 20) return "busy";
+  return "available";
+};
+
+const statusContext = (status: Status): { text: string; color: string } => {
+  switch (status) {
+    case "offline":
+      return {
+        text: "Offline",
+        color: "black",
+      };
+    case "busy":
+      return {
+        text: "Busy",
+        color: "orange",
+      };
+    case "available":
+      return {
+        text: "Available",
+        color: "green",
+      };
+  }
+};
 
 function App() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [date, setDate] = useState<Date>(new Date());
+  const [status, setStatus] = useState<{ text: string; color: string }>(
+    statusContext(STATUS.available)
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDate(new Date());
+      const currentDate = new Date();
+      setDate(currentDate);
+      setStatus(statusContext(getStatus(currentDate)));
     }, 1000);
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({
@@ -48,7 +95,7 @@ function App() {
           <div className="flex h-full w-2/3 flex-col justify-between">
             <h4 className="text-xl font-light">
               Hi, I'm <b className="font-bold">Billy Dyball</b>, a software
-              developer with a strong passion for making cool web apps and
+              developer with a strong passion for making exciting web apps and
               mobile projects.
             </h4>
             <div className="flex gap-4">
@@ -78,7 +125,7 @@ function App() {
           <h4 className="text-xl font-bold">About Me</h4>
           <p className="text-sm font-light">
             Hi, I'm Billy, a front-end software developer from England. My
-            primary tools of choice inclues:
+            primary tools of choice includes:
             <ul className="list-disc list-inside">
               <li>Typescript</li>
               <li>React</li>
@@ -91,23 +138,36 @@ function App() {
             Although I have been experimenting with some ASP.NET core recently.
           </p>
           <p className="text-sm font-light">
-            While I do have preferred tools I always choose the best one for the
-            job, even if it's not on my usual list. My goal is to find the right
-            solution for each project.
+            While I do have preferred tools, I always choose the best one for
+            the job. My goal is to find the right solution for each project.
           </p>
           <p className="text-sm font-light">
-            Beyond coding, I'm passionate about
+            Beyond coding, I'm passionate about travelling, rockets, and pickle
+            ball.
           </p>
         </GlassCard>
         <GlassCard
           mousePosition={mousePosition}
           colSpan="md:col-span-2 lg:col-span-1"
           rowSpan="md:row-span-4"
+          containerClassName="flex flex-col gap-4"
         >
           <h4 className="text-xl font-bold">Lets get to work!</h4>
           <div>
-            <p className="text-sm font-light text-gray-400">Email</p>
-            <p>billyjdyball@gmail.com</p>
+            <p className="text-sm font-light">Email</p>
+            <a href="mailto:billyjdyball@gmail.com">billyjdyball@gmail.com</a>
+          </div>
+          <div>
+            <p className="text-sm font-light">Linkedin</p>
+            <a href="https://uk.linkedin.com/in/billydyball" target="_blank">
+              linkedin.com/in/billydyball
+            </a>
+          </div>
+          <div>
+            <p className="text-sm font-light">Github</p>
+            <a href="https://github.com/BillyDyball" target="_blank">
+              github.com/BillyDyball
+            </a>
           </div>
           <p className="text-sm font-light"></p>
         </GlassCard>
@@ -115,24 +175,43 @@ function App() {
           mousePosition={mousePosition}
           colSpan="md:col-span-2"
           rowSpan="md:row-span-2"
+          containerClassName="flex flex-col gap-2"
         >
           <h4 className="text-xl font-bold">Projects</h4>
-          <div>
-            <p>Gymmy</p>
-            <p>Tickr</p>
-            <p>Path Vizualizer</p>
+          <div className="flex relative gap-4">
+            <GymmyLogo className="h-full cursor-pointer" />
+            <TickrLogo className="h-full cursor-pointer" />
+            <SocialRoastLogo className="h-full cursor-pointer" />
+            <PathFindingVisualizerLogo className="h-full cursor-pointer" />
           </div>
         </GlassCard>
         <GlassCard
           mousePosition={mousePosition}
           colSpan="md:col-span-1"
           rowSpan="md:row-span-2"
-        />
+          containerClassName="flex flex-col gap-4"
+        >
+          <h4 className="text-xl font-bold">Employment</h4>
+          <p className="text-sm">
+            Currently employed at{" "}
+            <a
+              className="underline"
+              href="https://www.ast-networks.com/"
+              target="_blank"
+            >
+              Applied Satellite Technologies
+            </a>
+          </p>
+        </GlassCard>
         <GlassCard
           mousePosition={mousePosition}
           colSpan="md:col-span-1"
           rowSpan="md:row-span-1"
-        />
+          containerClassName="flex items-center justify-center gap-2"
+        >
+          <p className="text-xl">{status.text}</p>
+          <div className={cn("h-3 w-3 rounded-full bg-green-500")}></div>
+        </GlassCard>
         <GlassCard
           mousePosition={mousePosition}
           colSpan="md:col-span-1"
@@ -159,6 +238,7 @@ function App() {
           mousePosition={mousePosition}
           colSpan="md:col-span-1"
           rowSpan="md:row-span-1"
+          containerClassName="p-4 flex items-center"
         >
           <p className="text-sm font-light">
             © 2024 · Crafted with ♥️ using React by Billy Dyball.
