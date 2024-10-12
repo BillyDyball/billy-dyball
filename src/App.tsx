@@ -8,7 +8,7 @@ import { GymmyLogo } from "./components/gymmy-logo";
 import { TickrLogo } from "./components/tickr-logo";
 import { SocialRoastLogo } from "./components/social-roast-logo";
 import { PathFindingVisualizerLogo } from "./components/path-finding-visualizer";
-import { cn } from "./lib/utils";
+import { Pulse } from "./components/pulse";
 
 // https://sparkly-speculoos-0c9197.netlify.app/
 
@@ -24,27 +24,27 @@ type Status = ObjectValues<typeof STATUS>;
 const getStatus = (date: Date): Status => {
   const hour = date.getHours();
 
-  if (hour < 6 || hour > 22) return "offline";
-  if (hour < 8 || hour > 20) return "busy";
-  return "available";
+  if (hour < 6 || hour > 22) return STATUS.offline;
+  if (hour < 8 || hour > 18) return STATUS.busy;
+  return STATUS.available;
 };
 
-const statusContext = (status: Status): { text: string; color: string } => {
+const statusContext = (status: Status): { text: Status; color: string } => {
   switch (status) {
     case "offline":
       return {
-        text: "Offline",
-        color: "black",
+        text: "offline",
+        color: "#4b5563",
       };
     case "busy":
       return {
-        text: "Busy",
-        color: "orange",
+        text: "busy",
+        color: "#fb923c",
       };
     case "available":
       return {
-        text: "Available",
-        color: "green",
+        text: "available",
+        color: "#4ade80",
       };
   }
 };
@@ -55,7 +55,7 @@ function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [date, setDate] = useState<Date>(new Date());
   const [status, setStatus] = useState<{ text: string; color: string }>(
-    statusContext(STATUS.available)
+    statusContext(STATUS.offline)
   );
 
   useEffect(() => {
@@ -209,8 +209,11 @@ function App() {
           rowSpan="md:row-span-1"
           containerClassName="flex items-center justify-center gap-2"
         >
-          <p className="text-xl">{status.text}</p>
-          <div className={cn("h-3 w-3 rounded-full bg-green-500")}></div>
+          <p className="text-x capitalize">{status.text}</p>
+          <Pulse
+            color={status.color}
+            animated={status.text !== STATUS.offline}
+          />
         </GlassCard>
         <GlassCard
           mousePosition={mousePosition}
