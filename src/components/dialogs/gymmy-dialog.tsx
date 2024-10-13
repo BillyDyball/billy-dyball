@@ -14,9 +14,9 @@ export function GymmyDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <GymmyLogo className="h-full cursor-pointer" />
+        <GymmyLogo className="h-full aspect-square cursor-pointer" />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Gymmy</DialogTitle>
           <DialogDescription>
@@ -27,7 +27,11 @@ export function GymmyDialog() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button type="submit">View App</Button>
+          <Button asChild variant={"link"}>
+            <a href="https://www.gymmy-apps.com/" target="_blank">
+              View App
+            </a>
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

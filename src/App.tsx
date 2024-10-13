@@ -178,7 +178,7 @@ function App() {
           containerClassName="flex flex-col gap-2"
         >
           <h4 className="text-xl font-bold">Projects</h4>
-          <div className="flex relative gap-4">
+          <div className="flex flex-1 justify-between min-h-0 relative gap-4">
             <GymmyDialog />
             <TickrDialog />
             <SocialRoastDialog />
