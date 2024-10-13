@@ -99,11 +99,18 @@ function App() {
               mobile projects.
             </h4>
             <div className="flex gap-4">
-              <IconButton>
-                <GitHubLogoIcon className="h-4 w-4" />
+              <IconButton asChild variant="outline" size="icon">
+                <a href="https://github.com/BillyDyball" target="_blank">
+                  <GitHubLogoIcon />
+                </a>
               </IconButton>
-              <IconButton variant="outline" size="icon">
-                <LinkedInLogoIcon className="h-4 w-4" />
+              <IconButton asChild variant="outline" size="icon">
+                <a
+                  href="https://uk.linkedin.com/in/billydyball"
+                  target="_blank"
+                >
+                  <LinkedInLogoIcon />
+                </a>
               </IconButton>
             </div>
           </div>
@@ -142,8 +149,8 @@ function App() {
             the job. My goal is to find the right solution for each project.
           </p>
           <p className="text-sm font-light">
-            Beyond coding, I'm passionate about travelling, rockets, and pickle
-            ball.
+            Beyond coding, I'm passionate about travelling, rockets, and
+            Pickleball.
           </p>
         </GlassCard>
         <GlassCard
