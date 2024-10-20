@@ -19,11 +19,29 @@ export function GymmyDialog() {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Gymmy</DialogTitle>
-          <DialogDescription>
-            Gymmy is a complete fitness application avaliable on the Apple and
-            Google play store which I designed, developed, and built by myself.
-            With the help of a business partner we success set up a business for
-            the application.
+          <DialogDescription className="flex flex-col gap-4">
+            <p>
+              This mobile-first fitness app, built using TypeScript, React
+              Native, and Expo, is designed to help users track their calories,
+              macros, and fitness progress in an intuitive way. It offers a
+              personalized meal planner that suggests balanced meals based on
+              individual nutritional needs, giving users the tools to manage
+              their diet easily. Backed by Firebase, the app securely stores
+              user data and allows for seamless goal-setting and weight
+              tracking. Users can set and adjust their fitness goals, making it
+              an ideal companion for those new to the gym or fitness lifestyle.
+            </p>
+            <p>
+              In the workout section, users can create custom workout routines
+              and track their progress in real-time. The app’s flexible goal
+              management system ensures that users stay motivated by allowing
+              them to shift their targets as they progress. By focusing on
+              simplicity and ease of use, the app serves as a beginner-friendly
+              guide, helping users build effective habits without the overwhelm
+              of complex dietary or exercise rules. Looking ahead, the app will
+              integrate Stripe for subscription-based services, adding even more
+              value to users’ fitness journeys.
+            </p>
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
